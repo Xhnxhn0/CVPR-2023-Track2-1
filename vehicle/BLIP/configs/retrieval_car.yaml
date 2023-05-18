@@ -1,0 +1,39 @@
+image_root: ['/home/admin1/hyr/CVPR_track2_DATA/train/train_images', '/home/admin1/hyr/CVPR_track2_DATA/val/val_images',
+             '/home/admin1/hyr/CVPR_track2_DATA/test/test_images']
+# ann_root: '/home/admin1/hyr/CVPR_track2_DATA/data.json'
+train_file:  '/home/admin1/hyr/CVPR_track2_DATA/train/train_label.txt'
+val_file: '/home/admin1/hyr/CVPR_track2_DATA/val/val_label.txt'
+test_file: '/home/admin1/hyr/CVPR_track2_DATA/test/test_text.txt'
+dataset: 'car'
+
+# set pretrained as a file path or an url
+# pretrained: './output/model_large.pth'
+# pretrained: './output/retrieval_car_itm_add_mask_color_img_promot_node5_epoch15/checkpoint_best.pth'
+# size of vit model; base or large
+
+car_info_prediction_root: "/home/admin1/hyr/CVPR_track2_DATA/color_from_bbox.json"
+#vit: 'base'
+#batch_size_train: 32
+#batch_size_test: 64
+#vit_grad_ckpt: True
+#vit_ckpt_layer: 4
+#init_lr: 1e-5
+
+vit: 'large'
+batch_size_train: 8
+batch_size_test: 32
+vit_grad_ckpt: True
+vit_ckpt_layer: 12
+init_lr: 5e-6
+
+image_size: 384
+queue_size: 57600
+alpha: 0.4
+k_test: 256
+negative_all_rank: True
+
+# optimizer
+weight_decay: 0.05
+min_lr: 0
+max_epoch: 15
+
