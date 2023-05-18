@@ -48,7 +48,7 @@ ouput
 # for training
 python -m torch.distributed.run --nproc_per_node=8 train_retrieval.py \
 --config ./configs/retrieval_car.yaml \
---pretrained ./output/model_large.pth
+--pretrained ./output/model_large.pth \
 --output_dir output/retrieval_car_itm_add_mask_color_img_promot_node5_epoch15
 ```
 
