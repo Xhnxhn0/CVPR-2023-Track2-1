@@ -19,7 +19,7 @@ def create_dataset(dataset, config, min_scale=0.5):
     transform_train = transforms.Compose([                        
             transforms.RandomResizedCrop(config['image_size'], scale=(min_scale, 1.0),interpolation=InterpolationMode.BICUBIC),
             transforms.RandomHorizontalFlip(),
-            RandomAugment(2,5,isPIL=True,augs=['Identity','AutoContrast','Brightness','Sharpness','Equalize',
+            RandomAugment(2, 5, isPIL=True, augs=['Identity','AutoContrast','Brightness','Sharpness','Equalize',
                                               'ShearX', 'ShearY', 'TranslateX', 'TranslateY', 'Rotate']),     
             transforms.ToTensor(),
             normalize,
@@ -60,11 +60,11 @@ def create_dataset(dataset, config, min_scale=0.5):
 
     elif dataset=='retrieval_car':
         train_dataset = re_train_dataset(config['train_file'], transform_train, config['image_root'][0],
-                                         color_info=config['car_info_prediction_root'])
+                                         color_info=config['car_info_prediction_root'][0])
         val_dataset = re_eval_dataset(config['val_file'], transform_test, config['image_root'][1],
-                                      color_info=config['car_info_prediction_root'])
+                                      color_info=config['car_info_prediction_root'][1])
         test_dataset = re_test_dataset(config['test_file'], transform_test, config['image_root'][2],
-                                      color_info=config['car_info_prediction_root'])
+                                      color_info=config['car_info_prediction_root'][2])
         return train_dataset, val_dataset, test_dataset
 
     elif dataset=='vqa': 

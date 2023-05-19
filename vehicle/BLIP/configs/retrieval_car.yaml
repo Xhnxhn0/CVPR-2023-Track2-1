@@ -1,5 +1,5 @@
-image_root: ['../../CVPR_track2_DATA/train/train_images', '../../CVPR_track2_DATA/val/val_images',
-             '../../CVPR_track2_DATA/test/test_images']
+image_root: ['../CVPR_track2_DATA/train/train_images', '../CVPR_track2_DATA/val/val_images',
+             '../CVPR_track2_DATA/test/test_images']
 # ann_root: '/home/admin1/hyr/CVPR_track2_DATA/data.json'
 train_file:  '../CVPR_track2_DATA/train/train_label.txt'
 val_file: '../CVPR_track2_DATA/val/val_label.txt'
@@ -11,7 +11,9 @@ pretrained: ''
 # pretrained: './output/retrieval_car_itm_add_mask_color_img_promot_node5_epoch15/checkpoint_best.pth'
 # size of vit model; base or large
 
-car_info_prediction_root: "../../CVPR_track2_DATA/color_from_bbox.json"
+car_info_prediction_root: ["../CVPR_track2_DATA/train/train_color_from_bbox.json",
+                           "../CVPR_track2_DATA/val/val_color_from_bbox.json",
+                          "../CVPR_track2_DATA/test/test_color_from_bbox.json"]
 #vit: 'base'
 #batch_size_train: 32
 #batch_size_test: 64

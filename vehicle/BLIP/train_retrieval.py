@@ -28,7 +28,7 @@ import utils
 from utils import cosine_lr_schedule
 from tqdm import tqdm
 from data import create_dataset, create_sampler, create_loader
-os.environ[ "CUDA_VISIBLE_DEVICES"] = "3,4"
+# os.environ[ "CUDA_VISIBLE_DEVICES"] = "2,3,4"
 
 
 def train(model, data_loader, optimizer, epoch, device, config):

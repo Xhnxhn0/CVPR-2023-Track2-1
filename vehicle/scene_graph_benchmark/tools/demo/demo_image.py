@@ -116,32 +116,19 @@ def main():
 
     transforms = build_transforms(cfg, is_train=False)
 
-    train_fn = os.path.join(args.img_file, "train", "train_images")
-    train_image_names = os.listdir(train_fn)
-    train_img_list = [os.path.join(train_fn, image_name) for image_name in train_image_names if
-                      str.isalpha(image_name.split(".")[0])]
-    print("train_img_list len is ", len(train_img_list))
+    vehicle_image_names = os.listdir(args.img_file)
+    vehicle_image_names_list = [os.path.join(args.img_file, image_name) for image_name in vehicle_image_names if
+                      str.isalpha(image_name.split(".")[0]) or "vehicle" in image_name]
+    print("vehicle_image_names_list len is ", len(vehicle_image_names_list))
 
-    val_fn = os.path.join(args.img_file, "val", "val_images")
-    val_image_names = os.listdir(val_fn)
-    val_img_list = [os.path.join(val_fn, image_name) for image_name in val_image_names if
-                    str.isalpha(image_name.split(".")[0])]
-    print("val_img_list len is ", len(val_img_list))
-
-    test_fn = os.path.join(args.img_file, "test", "test_images")
-    test_image_names = os.listdir(test_fn)
-    test_img_list = [os.path.join(test_fn, image_name) for image_name in test_image_names if "vehicle" in image_name]
-    print("test_img_list len is ", len(test_img_list))
-
-    vehicle_image_names = train_img_list + val_img_list + test_img_list
 
     save_dir = os.path.join(args.save_file, "bbox")
-    if not os.path.exists(os.path.join(args.save_file, "bbox")):
+    if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
 
     error_img_names = []
-    for vehicle_image_name_fn in tqdm(vehicle_image_names):
+    for vehicle_image_name_fn in tqdm(vehicle_image_names_list):
         try:
             cv2_img = cv2.imread(vehicle_image_name_fn)
             dets = detect_objects_on_single_image(model, transforms, cv2_img)
