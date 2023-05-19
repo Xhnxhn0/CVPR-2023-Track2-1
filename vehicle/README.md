@@ -88,23 +88,3 @@ python -m torch.distributed.run --nproc_per_node=8 train_retrieval.py \
 The best score file name is "blip_retrieval_car_itm_add_mask_color_img_promot_node5_epoch15_infer_3_submit.json".
 
 To conduct testing on the B-board, you need to modify the data directories in get_color_prediction.sh and BLIP/configs/retrieval_car.yaml again.
-
-
-
-# 车辆方案概述
-
-## 模型设计
-
-车辆检索采用[BLIP (BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation)](https://github.com/salesforce/BLIP/tree/main)，的代码作为修改。损失函数包括两个ITC loss和ITM loss。
-
-ITC:：图文对比损失，将成对的车辆图文拉近，将不成对的车辆图文拉远，此时引入车辆的tag标记(如 white Audi)，避免同类图文的表征错误的拉远。
-
-ITM：图文匹配损失，将成对的图文标记为1，不成对标记为0，同样引入车辆的tag标记。
-
-## 数据处理
-
-同行人一样将车辆数据分离出来进行训练，为了显示的为图像引入颜色标记，我们使用基于带属性检测的Fasfer-Rcnn（[Scene Graph Benchmark](https://github.com/microsoft/scene_graph_benchmark)）的目标检测模型为车辆检测颜色属性，然后在车辆图片的左上角打上颜色块，作为视觉promot增强，其作为辅助信息帮助模型更好的感知颜色属性。
-
-### 优化策略
-
-我们将BLIP模型训练15个epoch，将官方划分的val集合的mAP@10作为线下评测指标，取val集合最高mAP@10作为我们的最优模型。
